@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products - Inventory Management System</title>
+</head>
+<body>
+    <div>
+        <!-- Sidebar (Placeholder) -->
+        <ul>
+            <li><a href="#">Dashboard</a></li>
+            <li><a href="#">Products</a></li>
+            <li><a href="#">Suppliers</a></li>
+            <li><a href="#">Orders</a></li>
+            <li><a href="#">Stocks</a></li>
+            <li><a href="#">Charts</a></li>
+            <li><a href="#">Users</a></li>
+        </ul>
+    </div>
+    <div>
+        <h2>Products</h2>
+        <a href="add_product.html">Add New Product</a>
+
+        <div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Product Name</th>
+                        <th>Price</th>
+                        <th>Owner</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Product 1</td>
+                        <td>$10.00</td>
+                        <td>Owner Name</td>
+                        <td>
+                            <a href="edit_product.html?id=1">Edit</a>
+                            <form action="delete_product.html" method="POST">
+                                <input type="hidden" name="id" value="1">
+                                <button type="submit">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Product 2</td>
+                        <td>$15.00</td>
+                        <td>Owner Name</td>
+                        <td>
+                            <a href="edit_product.html?id=2">Edit</a>
+                            <form action="delete_product.html" method="POST">
+                                <input type="hidden" name="id" value="2">
+                                <button type="submit">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

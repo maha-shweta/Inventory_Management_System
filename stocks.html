@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stocks - Inventory Management System</title>
+</head>
+<body>
+    <div>
+        <!-- Sidebar (Placeholder) -->
+        <ul>
+            <li><a href="#">Dashboard</a></li>
+            <li><a href="#">Products</a></li>
+            <li><a href="#">Suppliers</a></li>
+            <li><a href="#">Orders</a></li>
+            <li><a href="#">Stocks</a></li>
+            <li><a href="#">Charts</a></li>
+            <li><a href="#">Users</a></li>
+        </ul>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-md-3 col-lg-2 sidebar">
+                <!-- Sidebar content goes here -->
+            </div>
+
+            <!-- Main Content -->
+            <div class="col-md-9 col-lg-10 main-content">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h2 class="welcome-text">Stocks</h2>
+                    <a href="add_stock.html" class="btn btn-primary">
+                        Add Stock Entry
+                    </a>
+                </div>
+
+                <div class="stocks-container">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Product</th>
+                                    <th>Quantity</th>
+                                    <th>Related Order</th>
+                                    <th>Added By</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Product Name</td>
+                                    <td>
+                                        <span class="badge badge-quantity">
+                                            100 units
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <span class="badge badge-completed">
+                                            Order #1234 (Completed)
+                                        </span>
+                                    </td>
+                                    <td>John Doe</td>
+                                    <td>
+                                        <a href="edit_stock.html?id=1" class="btn btn-primary btn-action">
+                                            Edit
+                                        </a>
+                                        <form action="delete_stock.html" method="POST" class="d-inline">
+                                            <input type="hidden" name="id" value="1">
+                                            <button type="submit" class="btn btn-danger btn-action">
+                                                Delete
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                                <!-- More stock entries would be added here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add/Edit Stock Modal -->
+    <div class="modal fade" id="addStockModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add Stock Entry</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="stockForm">
+                        <div class="mb-3">
+                            <label for="productSelect" class="form-label">Product</label>
+                            <select class="form-select" id="productSelect" required>
+                                <option value="">Select Product</option>
+                                <option value="1">Product Name 1</option>
+                                <option value="2">Product Name 2</option>
+                                <!-- Add more products here -->
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="quantity" class="form-label">Quantity</label>
+                            <input type="number" class="form-control" id="quantity" min="1" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="orderSelect" class="form-label">Related Order (Optional)</label>
+                            <select class="form-select" id="orderSelect">
+                                <option value="">Manual Entry</option>
+                                <option value="1">Order #1234 - Completed</option>
+                                <option value="2">Order #5678 - Completed</option>
+                                <!-- Add more orders here -->
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save Stock</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
