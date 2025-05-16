@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head> 
+  <meta charset="UTF-8" /> 
+  <meta name="viewport" content="width=device-width, initial-scale=1" /> 
+  <title>Supplier Reviews - Inventory Management System</title> 
+  <style> 
+    /* Reset */ 
+    * { 
+      box-sizing: border-box; 
+      margin: 0; 
+      padding: 0; 
+    } 
+    body { 
+      background-color: #1a1a1a; 
+      color: #fff; 
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+      min-height: 100vh; 
+      display: flex; 
+      height: 100vh; 
+      overflow: hidden; 
+    } 
+    a { 
+      color: inherit; 
+      text-decoration: none; 
+    } 
+    a:hover { 
+      text-decoration: underline; 
+    }
+
+    /* Sidebar */
+    .sidebar {
+      background-color: #2d2d2d;
+      width: 220px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      overflow-y: auto;
+    }
+    .nav-link {
+      color: #fff;
+      padding: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      user-select: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .nav-link:hover,
+    .nav-link.active {
+      background-color: #007bff;
+      color: #fff;
+    }
+
+    /* Main content */
+    .main-content {
+      flex: 1;
+      padding: 20px 30px;
+      overflow-y: auto;
+    }
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+    }
+    .header h2 {
+      font-size: 1.8rem;
+      font-weight: 600;
+    }
+    .btn-add {
+      background-color: #007bff;
+      color: #fff;
+      padding: 8px 16px;
+      border-radius: 5px;
+      border: none;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: background-color 0.3s ease;
+    }
+    .btn-add:hover {
+      background-color: #0056b3;
+    }
+
+    /* Alerts */
+    .alert {
+      padding: 12px 15px;
+      border-radius: 6px;
+      margin-bottom: 20px;
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+    .alert-success {
+      background-color: #4ab468;
+      color: white;
+    }
+    .alert-danger {
+      background-color: #b44a4a;
+      color: white;
+    }
+    .btn-close {
+      background: none;
+      border: none;
+      color: inherit;
+      font-weight: bold;
+      font-size: 1.2rem;
+      cursor: pointer;
+      margin-left: auto;
+    }
+
+    /* Reviews container */
+    .reviews-container {
+      background-color: #2d2d2d;
+      border-radius: 10px;
+      padding: 20px;
+      color: #fff;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      color: #fff;
+    }
+    thead th {
+      background-color: #2d2d2d;
+      border-bottom: 2px solid #007bff;
+      padding: 12px 10px;
+      text-align: left;
+    }
+    tbody td {
+      padding: 12px 10px;
+      border-bottom: 1px solid #4d4d4d;
+    }
+    tbody tr:nth-child(even) {
+      background-color: #4d4d4d;
+    }
+    tbody tr:hover {
+      background-color: #3a3a3a;
+    }
+
+    /* Action buttons */
+    .btn-action {
+      padding: 5px 10px;
+      margin: 0 2px;
+      border-radius: 3px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      border: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .btn-delete {
+      background-color: #dc3545;
+      color: #fff;
+      transition: background-color 0.3s ease;
+    }
+    .btn-delete:hover {
+      background-color: #a52a2a;
+    }
+
+    /* Icon placeholders */
+    .icon {
+      font-style: normal;
+      font-weight: bold;
+      font-size: 1.1rem;
+      user-select: none;
+    }
+
+    /* No reviews message */
+    .no-reviews {
+      padding: 40px 20px;
+      text-align: center;
+      color: #ccc;
+      font-size: 1.1rem;
+    }
+
+  </style>
+</head>
+<body>
+
+  <nav class="sidebar" aria-label="Main navigation">
+    <a href="#" class="nav-link"><span>🏠</span> Dashboard</a>
+    <a href="#" class="nav-link"><span>📦</span> Products</a>
+    <a href="#" class="nav-link"><span>🚚</span> Suppliers</a>
+    <a href="#" class="nav-link"><span>🛒</span> Orders</a>
+    <a href="#" class="nav-link"><span>📈</span> Stocks</a>
+    <a href="#" class="nav-link"><span>📊</span> Charts</a>
+    <a href="#" class="nav-link active"><span>⭐</span> Reviews</a>
+    <a href="#" class="nav-link"><span>👥</span> Users</a>
+  </nav>
+
+  <main class="main-content">
+    <div class="header">
+      <h2>Supplier Reviews</h2>
+    </div>
+
+    <!-- Example success alert -->
+    <div class="alert alert-success" style="display:none;">
+      Review submitted successfully!
+      <button class="btn-close" onclick="this.parentElement.style.display='none';">&times;</button>
+    </div>
+
+    <!-- Example error alert -->
+    <div class="alert alert-danger" style="display:none;">
+      Error submitting review.
+      <button class="btn-close" onclick="this.parentElement.style.display='none';">&times;</button>
+    </div>
+
+    <!-- Review Form -->
+    <section style="margin-bottom: 30px; background:#2d2d2d; border-radius:10px; padding:20px;">
+      <form method="POST" action="">
+        <label for="supplier" style="display:block; margin-bottom:8px; font-weight:600;">Select Supplier</label>
+        <select id="supplier" name="supplier_id" required style="width:100%; padding:8px; margin-bottom:20px; border-radius:5px; border:none; background:#1a1a1a; color:#fff;">
+          <option value="" disabled selected>Choose a supplier...</option>
+          <!-- PHP loop for suppliers -->
+          <?php foreach ($suppliers as $supplier): ?>
+            <option value="<?php echo $supplier['S_ID']; ?>"><?php echo htmlspecialchars($supplier['S_name']); ?></option>
+          <?php endforeach; ?>
+        </select>
+
+        <label style="display:block; margin-bottom:8px; font-weight:600;">Rating</label>
+        <div style="margin-bottom: 20px;">
+          <?php for ($i = 1; $i <= 5; $i++): ?>
+            <input type="radio" id="star<?php echo $i; ?>" name="rating" value="<?php echo $i; ?>" style="display:none;" <?php echo $i == 3 ? 'checked' : ''; ?>>
+            <label for="star<?php echo $i; ?>" style="font-size: 1.8rem; color: #777; cursor: pointer; user-select:none; margin-right:8px;">&#9733;</label>
+          <?php endfor; ?>
+        </div>
+
+        <button type="submit" name="submit_review" class="btn-add" style="padding:10px 20px; font-weight:600; background:#007bff; border:none; border-radius:5px; cursor:pointer; color:#fff; transition: background-color 0.3s;">
+          <span class="icon">⭐</span> Submit Review
+        </button>
+      </form>
+    </section>
+
+    <!-- Reviews Table -->
+    <div class="reviews-container">
+      <?php if (empty($reviews)): ?>
+        <div class="no-reviews" role="alert" aria-live="polite">
+          No reviews yet. Be the first to leave a review!
+        </div>
+      <?php else: ?>
+        <table aria-label="Supplier Reviews Table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Supplier</th>
+              <th>Rating</th>
+              <th>User</th>
+              <th>Review Date</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <?php foreach ($reviews as $review): ?>
+              <tr>
+                <td><?php echo $review['Review_ID']; ?></td>
+                <td><?php echo htmlspecialchars($review['S_name']); ?></td>
+                <td>
+                  <?php
+                    for ($star = 1; $star <= 5; $star++) {
+                      echo $star <= $review['Rating'] ? '★' : '☆';
+                    }
+                  ?>
+                </td>
+                <td><?php echo htmlspecialchars($review['UserName']); ?></td>
+                <td><?php echo htmlspecialchars(date('Y-m-d', strtotime($review['Review_date']))); ?></td>
+                <td>
+                  <?php if ($review['User_ID'] == $_SESSION['user_id'] || $is_admin): ?>
+                    <form method="POST" action="" onsubmit="return confirm('Are you sure you want to delete this review?');" style="display:inline;">
+                      <input type="hidden" name="delete_review" value="<?php echo $review['Review_ID']; ?>">
+                      <button type="submit" class="btn-action btn-delete" aria-label="Delete review ID <?php echo $review['Review_ID']; ?>">
+                        <span class="icon">🗑️</span> Delete
+                      </button>
+                    </form>
+                  <?php else: ?>
+                    <span style="color:#777;">—</span>
+                  <?php endif; ?>
+                </td>
+              </tr>
+            <?php endforeach; ?>
+          </tbody>
+        </table>
+      <?php endif; ?>
+    </div>
+
+  </main>
+
+</body>
+</html>
