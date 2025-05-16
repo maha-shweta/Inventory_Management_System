@@ -1,30 +1,151 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Inventory Management System</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Login - Inventory Management System</title>
+  <style>
+    /* Reset and base */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      background-color: #1a1a1a;
+      color: #fff;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+    .login-container {
+      background-color: #2d2d2d;
+      border-radius: 15px;
+      padding: 30px 25px;
+      max-width: 400px;
+      width: 100%;
+      box-shadow: 0 0 20px rgba(0,0,0,0.3);
+    }
+    .login-header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .login-icon {
+      font-size: 3rem;
+      color: #007bff;
+      margin-bottom: 15px;
+      display: inline-block;
+    }
+    .login-header h2 {
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+    .text-muted {
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 0.9rem;
+    }
+
+    /* Form */
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    label {
+      font-weight: 500;
+      margin-bottom: 8px;
+      display: block;
+      color: #fff;
+    }
+    input[type="email"],
+    input[type="password"] {
+      width: 100%;
+      padding: 12px;
+      border-radius: 6px;
+      border: 1px solid #4d4d4d;
+      background-color: #3d3d3d;
+      color: #fff;
+      font-size: 1rem;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    input::placeholder {
+      color: rgba(255, 255, 255, 0.5);
+    }
+    input:focus {
+      outline: none;
+      border-color: #007bff;
+      box-shadow: 0 0 6px #007bff;
+      background-color: #3d3d3d;
+      color: #fff;
+    }
+    button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 12px;
+      font-weight: 600;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    }
+    button:hover,
+    button:focus {
+      background-color: #0056b3;
+      transform: translateY(-1px);
+      box-shadow: 0 5px 15px rgba(0, 123, 255, 0.3);
+      outline: none;
+    }
+
+    /* Alert boxes */
+    .alert {
+      padding: 12px 15px;
+      border-radius: 6px;
+      margin-bottom: 20px;
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+    .alert-danger {
+      background-color: #b44a4a;
+      color: white;
+    }
+    .alert-success {
+      background-color: #4ab468;
+      color: white;
+    }
+  </style>
 </head>
 <body>
-    <div>
-        <div>
-            <div>
-                <h2>Login</h2>
-                <p>Welcome to Inventory Management System</p>
-            </div>
-
-            <form action="process_login.php" method="post">
-                <div>
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" required>
-                </div>
-                <div>
-                    <label for="password">Password</label>
-                    <input type="password" id="password" name="password" required>
-                </div>
-                <button type="submit">Login</button>
-            </form>
-        </div>
+  <div class="login-container">
+    <div class="login-header">
+      <div class="login-icon">📦</div>
+      <h2>Login</h2>
+      <p class="text-muted">Welcome to Inventory Management System</p>
     </div>
+
+    <!-- Example PHP error/success message placeholders -->
+    <!-- Replace or remove these divs as needed -->
+    <div class="alert alert-danger" style="display:none;">
+      <!-- Error message here -->
+    </div>
+    <div class="alert alert-success" style="display:none;">
+      <!-- Success message here -->
+    </div>
+
+    <form action="process_login.php" method="post" novalidate>
+      <div>
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="Enter your email" required />
+      </div>
+      <div>
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" placeholder="Enter your password" required />
+      </div>
+      <button type="submit">Login</button>
+    </form>
+  </div>
 </body>
 </html>
